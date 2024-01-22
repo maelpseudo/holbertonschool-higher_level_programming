@@ -1,9 +1,13 @@
 #!/usr/bin/python3
+
 for i in range(0, 100):
     if i < 99:
+        comma = ","
         if i < 10:
-            print("0{!r},".format(i), end=" ")
+            digit = "0"
         else:
-            print("{!r},".format(i), end=" ")
+            digit = ""
     else:
-        print("{!r}".format(i))
+        comma = ""
+    print("{0}{1}{2}".format(digit, i, comma), end=" ")
+print("\n", end="")
