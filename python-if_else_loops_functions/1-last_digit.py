@@ -8,4 +8,4 @@ elif int(repr(number)[-1]) < 6:
 else:
     str = "and is 0"
 
-print(f"Last digit of {number} is {int(repr(number)[-1])} {str}\n")
+print(f"Last digit of {number} is {int(repr(number)[-1])} {str}")
