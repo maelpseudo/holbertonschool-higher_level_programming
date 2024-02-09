@@ -1,0 +1,35 @@
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+>>> matrix = [[6, 9, 12], [15, 18, 21]]
+>>> matrix_divided(matrix, 3)
+[[2.0, 3.0, 4.0], [5.0, 6.0, 7.0]]
+
+>>> matrix = [[8, 2, 10], [16, 18, 22]]
+>>> matrix_divided(matrix, 2)
+[[4.0, 1.0, 5.0], [8.0, 9.0, 11.0]]
+
+>>> matrix = [[8, 2, 10], [16, 18, 22]]
+>>> matrix_divided(matrix, 0)
+Traceback (most recent call last):
+ZeroDivisionError: Division by zero is not allowed
+
+>>> matrix = [[8, 2], [16, 18, 22]]
+>>> matrix_divided(matrix, 2)
+Traceback (most recent call last):
+TypeError: Each row of the matrix must have the same size
+
+>>> matrix = [[8, 2, "10"], [16, 18, 22]]
+>>> matrix_divided(matrix, 3)
+Traceback (most recent call last):
+TypeError: Input must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[5, 4], [8, 9]], float('inf'))
+[[0.0, 0.0], [0.0, 0.0]]
+
+>>> matrix = [[8, 2, 10], [16, 18, 22]]
+>>>  matrix_divided(matrix, 2)
+[[4.0, 1.0, 5.0], [8.0, 9.0, 11.0]]
+
+>>> matrix_divided(matrix, float('inf'))
+[[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+>>>
