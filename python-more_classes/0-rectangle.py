@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+"""Define an empty class representing a rectangle"""
+
 
 class Rectangle:
-    """An empty class Rectangle that defines a rectangle"""
+    """The 'pass' statement is a placeholder for an empty block"""
     pass
