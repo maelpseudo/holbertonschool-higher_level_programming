@@ -1,0 +1,22 @@
+>>> MyList = __import__('1-my_list').MyList
+>>> my_list = MyList()
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> MyList.append("hello")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: descriptor 'append' for 'list' objects doesn't apply to a 'str' object
+>>> print(my_list)
+[1, 4, 2]
+>>> my_list.print_sorted()
+[1, 2, 4]
+>>> my_list.append(-6)
+>>> print(my_list)
+[1, 4, 2, -6]
+>>> my_list.print_sorted()
+[-6, 1, 2, 4]
+>>> my_list = MyList()
+>>> my_list.print_sorted()
+[]
+>>>
