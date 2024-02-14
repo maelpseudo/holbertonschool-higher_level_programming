@@ -1,45 +1,46 @@
 #!/usr/bin/python3
+""" a class BaseGeometry"""
+
 
 class BaseGeometry:
-    """
-    BaseGeometry class with an unimplemented area method and integer_validator.
-    """
+    """ define a class BaseGeometry """
     def area(self):
-        raise Exception("area() is not implemented")
+        """ define area """
+        raise Exception('area() is not implemented')
 
     def integer_validator(self, name, value):
-        if type(value) is not int:
+        if not isinstance(value, int):
             raise TypeError("{} must be an integer".format(name))
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
 
+
 class Rectangle(BaseGeometry):
-    """
-    Rectangle class inherits from BaseGeometry.
-    """
+    """ Rectangle """
     def __init__(self, width, height):
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
+        super().integer_validator("width", width)
+        super().integer_validator("height", height)
         self.__width = width
         self.__height = height
 
     def area(self):
+        """mesure area of rectangle"""
         return self.__width * self.__height
 
     def __str__(self):
-        return "[{}] {}/{}".format(self.__class__.__name__, self.__width, self.__height)
+        """define string representation"""
+        return "[Rectangle] {}/{}".format(self.__width, self.__height)
+
 
 class Square(Rectangle):
-    """
-    Square class inherits from Rectangle.
-    """
-    def __init__(self, size):
-        super().__init__(size, size)  # Initialize Rectangle with size as both width and height
-        self.__size = size
+    """square"""
 
-    def area(self):
-        return self.__size * self.__size
+    def __init__(self, size):
+        """Instantiation with size"""
+        super().integer_validator("size", size)
+        self.__size = size
+        super().__init__(size, size)
 
     def __str__(self):
-        # Ensure the class name is Square instead of Rectangle
-        return "[Square] {}/{}".format(self.__size, self.__size)
+        """ __str__ define """
+        return ("[Square] {}/{}".format(self.__size, self.__size))
