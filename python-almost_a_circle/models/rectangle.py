@@ -16,8 +16,8 @@ class Rectangle(Base):
     Attributes:
         width (int): The width of the rectangle.
         height (int): The height of the rectangle.
-        x (int): The x offset of the rectangle, not used in this method.
-        y (int): The y offset of the rectangle, not used in this method.
+        x (int): The x offset of the rectangle.
+        y (int): The y offset of the rectangle.
         id (int): The id of the rectangle.
     """
 
@@ -49,10 +49,14 @@ class Rectangle(Base):
     def height(self, value):
         self.__height = value
 
-    def display(self):
+    # Assuming other methods like display() are also defined here
+
+    def __str__(self):
         """
-        Prints the Rectangle instance with the '#' character,
-        ignoring 'x' and 'y'.
+        Override the __str__ method to return a string representation
+        of the Rectangle instance.
+        Returns:
+        str: string in the format "[Rectangle] (<id>)<x>/<y>-<width>/<height>".
         """
-        for _ in range(self.height):
-            print("#" * self.width)
+        return ("[Rectangle] ({}) {}/{} - {}/{}"
+                .format(self.id, self.x, self.y, self.width, self.height))
