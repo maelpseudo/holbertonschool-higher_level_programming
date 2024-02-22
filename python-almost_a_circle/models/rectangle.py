@@ -15,7 +15,13 @@ class Rectangle(Base):
 
     def display(self):
         """
-        Prints the Rectangle instance with the '#' character, taking care of 'x' and 'y' offsets.
+        Represents a rectangle.
+        Attributes:
+        width (int): The width of the rectangle.
+        height (int): The height of the rectangle.
+        x (int): The x offset of the rectangle.
+        y (int): The y offset of the rectangle.
+        id (int): The id of the rectangle.
         """
         # Print the 'y' offset - vertical space before the rectangle
         print("\n" * self.y, end="")
