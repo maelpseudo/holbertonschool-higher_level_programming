@@ -1,89 +1,71 @@
 #!/usr/bin/python3
-""" base """
+""" calss """
 import json
-import turtle
 
 
 class Base:
-    """ base """
+    """ base class """
+
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """Initialisation"""
-        Base.__nb_objects += 1
-
         if id is not None:
             self.id = id
         else:
+            Base.__nb_objects += 1
             self.id = Base.__nb_objects
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Convertit la liste des dictionnaires en chaîne JSON."""
-        if list_dictionaries is None:
+        """JSON string representation of list_dictionaries"""
+        if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
-        return json.dumps(list_dictionaries)
+        else:
+            return json.dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """Sauvegarde la liste des objets dans un fichier JSON."""
-        list_dicts = []
-        if list_objs:
-            for v in list_objs:
-                list_dicts.append(v.to_dictionary())
+        """Writes the JSON string representation of instances"""
+        if list_objs is None:
+            list_objs = []
 
-        with open('%s.json' % (cls.__name__), 'w') as file:
-            file.write(cls.to_json_string(list_dicts))
+        filename = cls.__name__ + ".json"
+        json_string = cls.to_json_string([obj.to_dictionary()
+                                         for obj in list_objs])
+        with open(filename, "w") as file:
+            file.write(json_string)
 
     @staticmethod
     def from_json_string(json_string):
-        """Charge la chaîne JSON en liste."""
-        if not json_string:
+        """list of dictionaries represented by json_string"""
+        if json_string is None or len(json_string) == 0:
             return []
-        return json.loads(json_string)
+        else:
+            return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
-        """Crée une instance à partir d'un dictionnaire."""
-        if 'rectangle' in cls.__name__.lower():
-            obj = cls(1, 1)
+        """instance with all attributes"""
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)
+        elif cls.__name__ == "Square":
+            dummy = cls(1)
         else:
-            obj = cls(1)
+            dummy = cls()
 
-        obj.update(**dictionary)
-
-        return obj
+        dummy.update(**dictionary)
+        return dummy
 
     @classmethod
     def load_from_file(cls):
-        """Charge les instances à partir d'un fichier JSON."""
+        """Returns a list of instances"""
+        filename = cls.__name__ + ".json"
         try:
-            with open('%s.json' % (cls.__name__), 'r') as file:
-                data = file.read()
+            with open(filename, "r") as file:
+                json_string = file.read()
+                dictionaries = cls.from_json_string(json_string)
+                instances = [cls.create(**dictionary)
+                             for dictionary in dictionaries]
+            return instances
         except FileNotFoundError:
             return []
-
-        data = cls.from_json_string(data)
-        return [cls.create(**v) for v in data]
-
-    @staticmethod
-    def draw(list_rectangles, list_squares):
-        """Dessine les rectangles et carrés avec Turtle."""
-        w = turtle.Screen()
-        w.bgcolor('yellow')
-        w.title('Almost a circle')
-
-        t = turtle.Turtle()
-        t.up()
-        t.clear()
-
-        for obj in list_rectangles + list_squares:
-            p = (obj.x, obj.y)
-            t.goto(p)
-            t.down()
-            for _ in range(2):
-                t.forward(obj.width)
-                t.left(90)
-                t.forward(obj.height)
-                t.left(90)
-            t.up()
