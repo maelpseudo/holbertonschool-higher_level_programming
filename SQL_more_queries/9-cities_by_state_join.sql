@@ -1,4 +1,4 @@
+-- Lists all cities with their state contained in the databasehbtn_0d_usa
 SELECT cities.id, cities.name, states.name
-FROM cities
-INNER JOIN states ON cities.state_id = states.id
+FROM cities JOIN states ON cities.state_id = states.id
 ORDER BY cities.id ASC;
